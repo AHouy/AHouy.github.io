@@ -1,0 +1,232 @@
+backend:
+  name: git-gateway
+  repo: AHouy/renonavales.com
+  branch: main
+
+local_backend: true
+
+publish_mode: editorial_workflow
+media_folder: static/assets
+public_folder: /assets
+site_url: https://itsrenowned.com
+# logo_url: https://your-site.com/images/logo.svg
+
+collections:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog" # Used in the UI
+    folder: "content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      # - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
+      - label: "Carousels"
+        name: "carousels"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - label: "Description"
+            name: "description"
+            widget: "text"
+            required: false
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "gallery" # Used in routes, e.g., /admin/collections/blog
+    label: "Gallery" # Used in the UI
+    folder: "content/gallery" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: "Layout", name: "layout", widget: "hidden", default: "gallery" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - label: "Carousels"
+        name: "carousels"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - label: "Description"
+            name: "description"
+            widget: "text"
+            required: false
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+      # - { label: "Body", name: "body", widget: "markdown" }
+  - name: "music"
+    label: "Music"
+    folder: "content/music"
+    create: true
+    fields: # The fields for each document, usually in front matter
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "music"
+      - label: "Template Key"
+        name: "templateKey"
+        widget: "hidden"
+        default: "music-page"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        default: "Music"
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+  - name: "videos"
+    label: "Videos"
+    folder: "content/videos"
+    create: true
+    fields:
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "videos"
+      - label: "Template Key"
+        name: "templateKey"
+        widget: "hidden"
+        default: "videos-page"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Videos"
+        name: "videos"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - label: "Description"
+            name: "description"
+            widget: "text"
+            required: false
+          - { label: "URL", name: "url", widget: "string", required: false }
+          - { label: "File", name: "file", widget: "file", required: false }
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "about"
+        label: "About"
+        file: "content/about.md"
+        fields: # The fields for each document, usually in front matter
+          - label: "Layout"
+            name: "layout"
+            widget: "hidden"
+            default: "about"
+          - label: "Template Key"
+            name: "templateKey"
+            widget: "hidden"
+            default: "about-page"
+          - label: "Title"
+            name: "title"
+            widget: "string"
+            default: "About"
+          - { label: "Body", name: "body", widget: "markdown" }
+          - label: "Documents"
+            name: "documents"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Description"
+                name: "description"
+                widget: "string"
+                required: false
+              - { label: "File", name: "file", widget: "file", required: false }
+      - name: "magazine"
+        label: "Magazine"
+        file: "content/magazine.md"
+        fields: # The fields for each document, usually in front matter
+          - label: "Layout"
+            name: "layout"
+            widget: "hidden"
+            default: "magazine"
+          - label: "Title"
+            name: "title"
+            widget: "string"
+            default: "Magazine"
+          - label: "Collections"
+            name: "collections"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "File", name: "file", widget: "file" }
+              - { label: "Buy", name: "buy", widget: "string", required: false }
+              - label: "Documents"
+                name: "documents"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "File", name: "file", widget: "file" }
+      - name: "music"
+        label: "Music"
+        file: "content/music.md"
+        fields: # The fields for each document, usually in front matter
+          - label: "Layout"
+            name: "layout"
+            widget: "hidden"
+            default: "music"
+          - label: "Template Key"
+            name: "templateKey"
+            widget: "hidden"
+            default: "music-page"
+          - label: "Title"
+            name: "title"
+            widget: "string"
+            default: "Music"
+          - { label: "Body", name: "body", widget: "markdown" }
+      - name: "videos"
+        label: "Videos"
+        file: "content/videos.md"
+        fields: # The fields for each document, usually in front matter
+          - label: "Layout"
+            name: "layout"
+            widget: "hidden"
+            default: "videos"
+          - label: "Template Key"
+            name: "templateKey"
+            widget: "hidden"
+            default: "videos-page"
+          - label: "Title"
+            name: "title"
+            widget: "string"
+            default: "Videos"
+  - name: "misc"
+    label: "Miscellaneous"
+    files:
+      - name: "livestream"
+        label: "Livestream Library"
+        file: "static/livestream.json"
+        fields:
+          - label: "Library"
+            name: "library"
+            widget: "list"
+            summary: "{{fields.title}} - {{fields.album}}"
+            fields:
+              - label: "Type"
+                name: "type"
+                widget: "select"
+                options: ["audio", "video"]
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Album"
+                name: "album"
+                widget: "string"
+                required: false
+              - { label: "File", name: "file", widget: "file", required: false }
+              - { label: "Length", name: "length", widget: "number" }
+      - name: "marquee"
+        label: "Marquee"
+        file: "content/marquee.md"
+        fields:
+          - { label: "Text", name: "text", widget: "string" }
